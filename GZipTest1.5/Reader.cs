@@ -33,7 +33,7 @@ namespace GZipTest1._5
 
                     inputStream.Read(Source.dataSource[blockNumber], 0, length);
 
-                    Debug.WriteLine($"% :  {((double)inputStream.Position) / inputStream.Length * 100}");
+                    //Debug.WriteLine($"% :  {((double)inputStream.Position) / inputStream.Length * 100}");
 
                     var compressBlock = new CompressBlockInfo()
                     {
@@ -41,6 +41,7 @@ namespace GZipTest1._5
                         length = length,
                         readBlockNumber = readBlockNumber++
                     };
+
                     Source.compressQueue.Enqueue(compressBlock);
                     Source.queueToCompressEWH.Set();
                 }

@@ -20,16 +20,17 @@ namespace GZipTest1._5
             for (int i = 0; i < Source.threadCount; i++)
             {
                 Thread zipThread = new Thread(new ThreadStart(Zipper.Compress));
-
+                zipThread.Priority = ThreadPriority.AboveNormal;
                 zipThread.Name = $"zipThread {i}";
                 zipThread.Start();
             }
 
             Thread.CurrentThread.Name = $"writerThread";
             Thread thread = new Thread(new ThreadStart(reader.Read));
+            thread.Priority = ThreadPriority.Normal;
             thread.Name = $"readerThread";
             thread.Start();
-            Thread.CurrentThread.Priority = ThreadPriority.Highest;
+            Thread.CurrentThread.Priority = ThreadPriority.Normal;
             Writer writer = new Writer(outputName);
             writer.Write();
 

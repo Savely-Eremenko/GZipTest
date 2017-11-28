@@ -27,6 +27,7 @@ namespace GZipTest1._5
                 {
                     while (Source.compressDataInfo.ContainsKey(writeBlockNumber))
                     {
+
                         Debug.WriteLine($"Reader :  {Source.freeBlocksQueue.Count()}");
                         Debug.WriteLine($"Compress :  {Source.compressQueue.Count()}");
                         Debug.WriteLine($"Writer :  {Source.compressDataInfo.Count()}");

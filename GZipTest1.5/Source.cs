@@ -10,8 +10,8 @@ namespace GZipTest1._5
 {
     class Source
     {
-        public static int threadCount = Environment.ProcessorCount - 2; // количество потоков выбирается по количеству ядер процессора
-        public static int roundCount = 50;
+        public static int threadCount = Environment.ProcessorCount -2; // количество потоков выбирается по количеству ядер процессора
+        public static int roundCount = 200;
         public static int blockForCompress = ((int)Process.GetCurrentProcess().VirtualMemorySize64 * 4) / roundCount;
 
         public static byte[][] dataSource = new byte[roundCount][];

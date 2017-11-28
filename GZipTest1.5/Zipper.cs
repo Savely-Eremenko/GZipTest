@@ -5,6 +5,7 @@ using System.IO;
 using System.IO.Compression;
 using System.Linq;
 using System.Text;
+using System.Threading;
 using System.Threading.Tasks;
 
 namespace GZipTest1._5
@@ -20,6 +21,8 @@ namespace GZipTest1._5
             {
                 bool inside = false;
                 CompressBlockInfo blockInfo = null;
+
+                //Debug.WriteLine($"{Thread.CurrentThread.Name}");
                 lock (locker)
                 {
                     inside = Source.compressQueue.Count() > 0;
@@ -55,12 +58,18 @@ namespace GZipTest1._5
             BitConverter.GetBytes(length)
                         .CopyTo(Source.dataSource[blockInfo.blockNumber], 4);
 
-            Source.compressDataInfo.Add(blockInfo.readBlockNumber, new WriteCompressBlock
+            lock(locker)
             {
-                blockNumber = blockInfo.blockNumber,
-                length = length,
-                readBlockNumber = blockInfo.readBlockNumber
-            });
+                Source.compressDataInfo.Add(blockInfo.readBlockNumber, new WriteCompressBlock
+                {
+                    blockNumber = blockInfo.blockNumber,
+                    length = length,
+                    readBlockNumber = blockInfo.readBlockNumber
+                });
+            }
+            
+            if (!Source.compressDataInfo.ContainsKey(blockInfo.readBlockNumber))
+                Console.WriteLine("error");
 
             return blockInfo.length != Source.blockForCompress;
         }

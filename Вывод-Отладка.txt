@@ -1,0 +1,659 @@
+﻿"GZipTest1.5.exe" (CLR v4.0.30319: DefaultDomain). Загружено "C:\Windows\Microsoft.Net\assembly\GAC_32\mscorlib\v4.0_4.0.0.0__b77a5c561934e089\mscorlib.dll". Невозможно найти или открыть PDB-файл.
+"GZipTest1.5.exe" (CLR v4.0.30319: DefaultDomain). Загружено "F:\Coding\Veeam\GZipTest1.5\GZipTest1.5\bin\Debug\GZipTest1.5.exe". Символы загружены.
+"GZipTest1.5.exe" (CLR v4.0.30319: GZipTest1.5.exe). Загружено "C:\Windows\Microsoft.Net\assembly\GAC_MSIL\System\v4.0_4.0.0.0__b77a5c561934e089\System.dll". Невозможно найти или открыть PDB-файл.
+"GZipTest1.5.exe" (CLR v4.0.30319: GZipTest1.5.exe). Загружено "C:\Windows\Microsoft.Net\assembly\GAC_MSIL\System.Core\v4.0_4.0.0.0__b77a5c561934e089\System.Core.dll". Невозможно найти или открыть PDB-файл.
+"GZipTest1.5.exe" (CLR v4.0.30319: GZipTest1.5.exe). Загружено "C:\Windows\Microsoft.Net\assembly\GAC_MSIL\System.Configuration\v4.0_4.0.0.0__b03f5f7f11d50a3a\System.Configuration.dll". Невозможно найти или открыть PDB-файл.
+"GZipTest1.5.exe" (CLR v4.0.30319: GZipTest1.5.exe). Загружено "C:\Windows\Microsoft.Net\assembly\GAC_MSIL\System.Xml\v4.0_4.0.0.0__b77a5c561934e089\System.Xml.dll". Невозможно найти или открыть PDB-файл.
+% :  0,029386648796542
+reader 1
+% :  0,0587732975930841
+reader 2
+% :  0,0881599463896261
+reader 3
+% :  0,117546595186168
+reader 4
+% :  0,14693324398271
+reader 5
+% :  0,176319892779252
+reader 6
+% :  0,205706541575794
+reader 7
+% :  0,235093190372336
+zipper 1
+zipper 0
+writer 0
+reader 8
+writer 1
+zipper 2
+writer 2
+% :  0,264479839168878
+reader 9
+% :  0,29386648796542
+reader 10
+% :  0,323253136761962
+reader 11
+zipper 3
+zipper 4
+writer 3
+% :  0,352639785558504
+writer 4
+reader 12
+% :  0,382026434355046
+reader 13
+% :  0,411413083151588
+reader 14
+zipper 5
+writer 5
+% :  0,440799731948131
+reader 15
+% :  0,470186380744673
+reader 16
+zipper 7
+zipper 6
+writer 6
+writer 7
+% :  0,499573029541215
+reader 17
+zipper 8
+% :  0,528959678337757
+reader 18
+writer 8
+% :  0,558346327134299
+reader 19
+% :  0,587732975930841
+reader 20
+zipper 10
+% :  0,617119624727383
+reader 21
+writer 9
+zipper 9
+writer 10
+% :  0,646506273523925
+reader 22
+% :  0,675892922320467
+reader 23
+% :  0,705279571117009
+reader 24
+zipper 11
+% :  0,734666219913551
+reader 25
+writer 11
+% :  0,764052868710093
+reader 26
+zipper 12
+writer 12
+% :  0,793439517506635
+reader 27
+zipper 13
+writer 13
+% :  0,822826166303177
+reader 28
+zipper 14
+writer 14
+% :  0,852212815099719
+reader 29
+zipper 15
+% :  0,881599463896261
+reader 30
+zipper 16
+writer 15
+writer 16
+% :  0,910986112692803
+reader 31
+% :  0,940372761489345
+reader 32
+zipper 17
+writer 17
+% :  0,969759410285887
+reader 33
+zipper 18
+writer 18
+zipper 19
+writer 19
+% :  0,999146059082429
+reader 34
+zipper 20
+% :  1,02853270787897
+reader 35
+writer 20
+% :  1,05791935667551
+reader 36
+% :  1,08730600547206
+zipper 21
+reader 37
+zipper 22
+writer 21
+% :  1,1166926542686
+reader 38
+writer 22
+% :  1,14607930306514
+reader 39
+% :  1,17546595186168
+reader 40
+zipper 23
+writer 23
+% :  1,20485260065822
+reader 41
+% :  1,23423924945477
+reader 42
+zipper 24
+% :  1,26362589825131
+reader 43
+writer 24
+% :  1,29301254704785
+reader 44
+% :  1,32239919584439
+reader 45
+zipper 25
+writer 25
+zipper 26
+writer 26
+% :  1,35178584464093
+reader 46
+% :  1,38117249343748
+reader 47
+zipper 27
+writer 27
+% :  1,41055914223402
+reader 48
+zipper 28
+writer 28
+% :  1,43994579103056
+reader 49
+% :  1,4693324398271
+reader 50
+zipper 29
+writer 29
+% :  1,49871908862364
+reader 51
+zipper 30
+writer 30
+zipper 31
+writer 31
+% :  1,52810573742019
+reader 52
+% :  1,55749238621673
+reader 53
+zipper 32
+% :  1,58687903501327
+reader 54
+writer 32
+% :  1,61626568380981
+reader 55
+zipper 33
+% :  1,64565233260635
+reader 56
+writer 33
+zipper 34
+writer 34
+% :  1,6750389814029
+reader 57
+zipper 35
+writer 35
+% :  1,70442563019944
+reader 58
+zipper 36
+writer 36
+% :  1,73381227899598
+reader 59
+zipper 37
+writer 37
+% :  1,76319892779252
+reader 60
+% :  1,79258557658906
+reader 61
+zipper 38
+writer 38
+% :  1,82197222538561
+reader 62
+% :  1,85135887418215
+reader 63
+zipper 39
+writer 39
+% :  1,88074552297869
+reader 64
+zipper 40
+writer 40
+zipper 42
+% :  1,91013217177523
+reader 65
+zipper 41
+writer 41
+writer 42
+% :  1,93951882057177
+reader 66
+zipper 43
+writer 43
+% :  1,96890546936832
+reader 67
+% :  1,99829211816486
+reader 68
+zipper 44
+writer 44
+% :  2,0276787669614
+reader 69
+% :  2,05706541575794
+reader 70
+zipper 45
+writer 45
+% :  2,08645206455448
+reader 71
+zipper 46
+writer 46
+zipper 47
+writer 47
+% :  2,11583871335103
+reader 72
+zipper 48
+% :  2,14522536214757
+reader 73
+zipper 49
+writer 48
+writer 49
+% :  2,17461201094411
+reader 74
+% :  2,20399865974065
+reader 75
+% :  2,23338530853719
+reader 76
+% :  2,26277195733374
+reader 77
+zipper 50
+writer 50
+% :  2,29215860613028
+reader 78
+zipper 51
+writer 51
+% :  2,32154525492682
+reader 79
+zipper 52
+% :  2,35093190372336
+reader 80
+zipper 53
+writer 52
+% :  2,3803185525199
+reader 81
+writer 53
+zipper 55
+zipper 54
+writer 54
+% :  2,40970520131645
+reader 82
+writer 55
+% :  2,43909185011299
+reader 83
+% :  2,46847849890953
+reader 84
+zipper 56
+writer 56
+zipper 57
+writer 57
+% :  2,49786514770607
+reader 85
+zipper 59
+% :  2,52725179650261
+reader 86
+% :  2,55663844529916
+reader 87
+% :  2,5860250940957
+reader 88
+% :  2,61541174289224
+reader 89
+zipper 62
+zipper 60
+writer 58
+% :  2,64479839168878
+zipper 61
+writer 59
+zipper 58
+reader 90
+writer 60
+zipper 63
+writer 61
+% :  2,67418504048532
+reader 91
+writer 62
+% :  2,70357168928187
+reader 92
+writer 63
+% :  2,73295833807841
+reader 93
+zipper 64
+% :  2,76234498687495
+reader 94
+writer 64
+% :  2,79173163567149
+reader 95
+% :  2,82111828446804
+reader 96
+% :  2,85050493326458
+reader 97
+% :  2,87989158206112
+reader 98
+zipper 65
+zipper 67
+writer 65
+% :  2,90927823085766
+reader 99
+zipper 69
+% :  2,9386648796542
+reader 100
+zipper 66
+writer 66
+writer 67
+% :  2,96805152845075
+reader 101
+writer 68
+zipper 68
+writer 69
+% :  2,99743817724729
+reader 102
+zipper 70
+writer 70
+% :  3,02682482604383
+reader 103
+% :  3,05621147484037
+reader 104
+% :  3,08559812363691
+reader 105
+% :  3,11498477243346
+reader 106
+zipper 73
+zipper 74
+% :  3,14437142123
+reader 107
+zipper 72
+zipper 71
+writer 71
+% :  3,17375807002654
+reader 108
+writer 72
+writer 73
+% :  3,20314471882308
+writer 74
+reader 109
+% :  3,23253136761962
+reader 110
+zipper 76
+zipper 75
+% :  3,26191801641617
+reader 111
+writer 75
+writer 76
+% :  3,29130466521271
+reader 112
+% :  3,32069131400925
+reader 113
+% :  3,35007796280579
+reader 114
+% :  3,37946461160233
+reader 115
+% :  3,40885126039888
+reader 116
+zipper 78
+% :  3,43823790919542
+reader 117
+writer 77
+zipper 77
+writer 78
+% :  3,46762455799196
+reader 118
+zipper 82
+zipper 80
+zipper 79
+writer 79
+writer 80
+% :  3,4970112067885
+reader 119
+% :  3,52639785558504
+reader 120
+zipper 81
+writer 81
+% :  3,55578450438159
+reader 121
+writer 82
+% :  3,58517115317813
+reader 122
+% :  3,61455780197467
+reader 123
+% :  3,64394445077121
+reader 124
+zipper 83
+writer 83
+% :  3,67333109956775
+reader 125
+% :  3,7027177483643
+reader 126
+zipper 85
+% :  3,73210439716084
+reader 127
+writer 84
+zipper 84
+% :  3,76149104595738
+reader 128
+writer 85
+% :  3,79087769475392
+reader 129
+zipper 86
+writer 86
+zipper 87
+writer 87
+% :  3,82026434355046
+reader 130
+zipper 88
+% :  3,84965099234701
+reader 131
+% :  3,87903764114355
+reader 132
+% :  3,90842428994009
+reader 133
+% :  3,93781093873663
+reader 134
+% :  3,96719758753317
+reader 135
+% :  3,99658423632972
+reader 136
+% :  4,02597088512626
+reader 137
+% :  4,0553575339228
+reader 138
+% :  4,08474418271934
+reader 139
+% :  4,11413083151588
+reader 140
+zipper 89
+% :  4,14351748031243
+reader 141
+% :  4,17290412910897
+reader 142
+% :  4,20229077790551
+reader 143
+zipper 90
+zipper 94
+zipper 92
+zipper 91
+zipper 93
+% :  4,23167742670205
+reader 144
+% :  4,2610640754986
+reader 145
+% :  4,29045072429514
+reader 146
+% :  4,31983737309168
+reader 147
+% :  4,34922402188822
+reader 148
+% :  4,37861067068476
+reader 149
+% :  4,40799731948131
+reader 150
+% :  4,43738396827785
+reader 151
+% :  4,46677061707439
+reader 152
+% :  4,49615726587093
+reader 153
+% :  4,52554391466747
+reader 154
+% :  4,55493056346401
+reader 155
+% :  4,58431721226056
+reader 156
+% :  4,6137038610571
+reader 157
+% :  4,64309050985364
+reader 158
+% :  4,67247715865018
+reader 159
+% :  4,70186380744672
+reader 160
+% :  4,73125045624327
+reader 161
+% :  4,76063710503981
+reader 162
+% :  4,79002375383635
+reader 163
+% :  4,81941040263289
+reader 164
+zipper 95
+% :  4,84879705142944
+reader 165
+% :  4,87818370022598
+reader 166
+% :  4,90757034902252
+reader 167
+% :  4,93695699781906
+reader 168
+% :  4,9663436466156
+reader 169
+% :  4,99573029541215
+reader 170
+% :  5,02511694420869
+reader 171
+% :  5,05450359300523
+reader 172
+% :  5,08389024180177
+reader 173
+% :  5,11327689059831
+reader 174
+% :  5,14266353939486
+reader 175
+% :  5,1720501881914
+reader 176
+% :  5,20143683698794
+reader 177
+zipper 100
+% :  5,23082348578448
+reader 178
+zipper 98
+zipper 97
+zipper 96
+% :  5,26021013458102
+reader 179
+% :  5,28959678337757
+reader 180
+zipper 99
+% :  5,31898343217411
+reader 181
+% :  5,34837008097065
+reader 182
+% :  5,37775672976719
+reader 183
+% :  5,40714337856373
+reader 184
+% :  5,43653002736028
+reader 185
+% :  5,46591667615682
+reader 186
+% :  5,49530332495336
+reader 187
+% :  5,5246899737499
+reader 188
+zipper 101
+zipper 102
+zipper 105
+zipper 103
+zipper 104
+zipper 106
+zipper 107
+zipper 111
+zipper 109
+zipper 108
+zipper 110
+zipper 112
+zipper 113
+zipper 114
+zipper 116
+zipper 117
+zipper 118
+zipper 115
+zipper 119
+zipper 120
+zipper 124
+zipper 121
+zipper 122
+zipper 123
+zipper 125
+zipper 126
+zipper 128
+zipper 127
+zipper 129
+zipper 130
+zipper 131
+zipper 133
+zipper 132
+zipper 134
+zipper 137
+zipper 136
+zipper 135
+zipper 142
+zipper 138
+zipper 139
+zipper 140
+zipper 141
+zipper 143
+zipper 144
+zipper 145
+zipper 146
+zipper 147
+zipper 148
+zipper 149
+zipper 150
+zipper 151
+zipper 152
+zipper 153
+zipper 154
+zipper 155
+zipper 156
+zipper 157
+zipper 158
+zipper 159
+zipper 161
+zipper 160
+zipper 162
+zipper 163
+zipper 165
+zipper 164
+zipper 167
+zipper 166
+zipper 170
+zipper 169
+zipper 171
+zipper 168
+zipper 173
+zipper 172
+zipper 177
+zipper 176
+zipper 175
+zipper 174
+zipper 178
+zipper 179
+zipper 182
+zipper 180
+zipper 183
+zipper 181
+zipper 184
+zipper 185
+zipper 186
+zipper 187
+"GZipTest1.5.exe" (CLR v4.0.30319: GZipTest1.5.exe). Загружено "C:\Program Files (x86)\Microsoft Visual Studio\2017\Enterprise\Common7\IDE\PrivateAssemblies\Runtime\Microsoft.VisualStudio.Debugger.Runtime.dll". 
