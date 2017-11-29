@@ -24,6 +24,7 @@ namespace GZipTest1._5
 
         public void Read()
         {
+            int index = 0;
             while (inputStream.Position < inputStream.Length)
             {
                 if (Source.freeBlocksQueue.Count() > 0)
@@ -32,7 +33,15 @@ namespace GZipTest1._5
                     int length = (int)((inputStream.Length - inputStream.Position) < Source.blockForCompress ? inputStream.Length - inputStream.Position : Source.blockForCompress);
 
                     inputStream.Read(Source.dataSource[blockNumber], 0, length);
-
+                    //index++;
+                    //if(index == 100)
+                    //{
+                    //    Debug.WriteLine($"Reader :  {Source.freeBlocksQueue.Count()}");
+                    //    Debug.WriteLine($"Compress :  {Source.compressQueue.Count()}");
+                    //    Debug.WriteLine($"Writer :  {Source.compressDataInfo.Count()}");
+                    //    index = 0;
+                    //}
+                    
                     //Debug.WriteLine($"% :  {((double)inputStream.Position) / inputStream.Length * 100}");
 
                     var compressBlock = new CompressBlockInfo()

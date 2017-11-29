@@ -15,23 +15,28 @@ namespace GZipTest1._5
 
         public Writer(string outFileName)
         {  
-            outputStream = new FileStream(outFileName, FileMode.Create);
-            //outputStream =new FileStream(outFileName, FileMode.Create, FileAccess.Write, FileShare.Write, Source.readBlockSize/2,FileOptions.Asynchronous);
+            //outputStream = new FileStream(outFileName, FileMode.Create);
+            outputStream =new FileStream(outFileName, FileMode.Create, FileAccess.Write, FileShare.Write, Source.blockForCompress,FileOptions.Asynchronous);
         }
 
         public void Write()
         {
+            int index = 0;
             while (!Source.endOfZip || Source.compressDataInfo.Count() > 0)
             {
+
                 if (Source.compressDataInfo.Count() > 0)
                 {
                     while (Source.compressDataInfo.ContainsKey(writeBlockNumber))
                     {
-
-                        Debug.WriteLine($"Reader :  {Source.freeBlocksQueue.Count()}");
-                        Debug.WriteLine($"Compress :  {Source.compressQueue.Count()}");
-                        Debug.WriteLine($"Writer :  {Source.compressDataInfo.Count()}");
-
+                        //index++;
+                        //if (index == 10)
+                        //{
+                        //    Debug.WriteLine($"Reader :  {Source.freeBlocksQueue.Count()}");
+                        //    Debug.WriteLine($"Compress :  {Source.compressQueue.Count()}");
+                        //    Debug.WriteLine($"Writer :  {Source.compressDataInfo.Count()}");
+                        //    index = 0;
+                        //}
                         WriteToFile(writeBlockNumber);
                         writeBlockNumber++;
                     }
