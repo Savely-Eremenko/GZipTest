@@ -34,14 +34,14 @@ namespace GZipTest1._5
 
                     inputStream.Read(Source.dataSource[blockNumber], 0, length);
                     //index++;
-                    //if(index == 100)
+                    //if (index == 10)
                     //{
                     //    Debug.WriteLine($"Reader :  {Source.freeBlocksQueue.Count()}");
                     //    Debug.WriteLine($"Compress :  {Source.compressQueue.Count()}");
                     //    Debug.WriteLine($"Writer :  {Source.compressDataInfo.Count()}");
                     //    index = 0;
                     //}
-                    
+
                     //Debug.WriteLine($"% :  {((double)inputStream.Position) / inputStream.Length * 100}");
 
                     var compressBlock = new CompressBlockInfo()

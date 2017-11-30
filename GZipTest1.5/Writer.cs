@@ -12,6 +12,8 @@ namespace GZipTest1._5
     {
         FileStream outputStream;
         int writeBlockNumber = 0;
+        int writeSize = 0;
+        byte[] writeArray = new byte[Source.memorySize / 2];
 
         public Writer(string outFileName)
         {  
@@ -21,6 +23,7 @@ namespace GZipTest1._5
 
         public void Write()
         {
+
             int index = 0;
             while (!Source.endOfZip || Source.compressDataInfo.Count() > 0)
             {
@@ -29,18 +32,31 @@ namespace GZipTest1._5
                 {
                     while (Source.compressDataInfo.ContainsKey(writeBlockNumber))
                     {
-                        //index++;
-                        //if (index == 10)
-                        //{
-                        //    Debug.WriteLine($"Reader :  {Source.freeBlocksQueue.Count()}");
-                        //    Debug.WriteLine($"Compress :  {Source.compressQueue.Count()}");
-                        //    Debug.WriteLine($"Writer :  {Source.compressDataInfo.Count()}");
-                        //    index = 0;
-                        //}
-                        WriteToFile(writeBlockNumber);
-                        writeBlockNumber++;
+                        if ((Source.compressDataInfo.Count() > 10))
+                        {
+                            while (Source.compressDataInfo.ContainsKey(writeBlockNumber) && writeSize < writeArray.Length - Source.blockForCompress * 2)
+                            {
+                                Array.Copy(Source.dataSource[Source.compressDataInfo[writeBlockNumber].blockNumber], 0, writeArray, writeSize, Source.compressDataInfo[writeBlockNumber].length);
+                                writeSize += Source.compressDataInfo[writeBlockNumber].length;
+
+                                Source.freeBlocksQueue.Enqueue(Source.compressDataInfo[writeBlockNumber].blockNumber);
+                                Source.compressDataInfo.Remove(writeBlockNumber);
+                                Source.compressQueueIsFullEWH.Set();
+
+                                index++;
+                                writeBlockNumber++;
+                            }
+                            outputStream.Write(writeArray, 0, writeSize);
+                            writeSize = 0;
+                            index = 0;
+                        }
+                        else
+                        {
+                            WriteToFile(writeBlockNumber);
+                            writeBlockNumber++;
+                        }
                     }
-                }
+        }
                 else
                 {
                     Source.queueToWriteEWH.Reset();
@@ -60,3 +76,5 @@ namespace GZipTest1._5
         }
     }
 }
+
+//                
