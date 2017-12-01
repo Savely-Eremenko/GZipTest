@@ -9,7 +9,7 @@ namespace GZipTest1._5
 {
     class Program
     {
-        static string inputName = @"F:\test\input2.mkv", outputName = @"F:\test\test.gz";
+        static string inputName = @"F:\test\input2.mkv", zipName = @"F:\test\test.gz", outputName = @"F:\test\output.mkv" ;
 
         static void Main(string[] args)
         {
@@ -28,14 +28,15 @@ namespace GZipTest1._5
                 zipThread.Start();
             }
 
-            
+
             Thread thread = new Thread(new ThreadStart(reader.Read));
+            //Thread thread = new Thread(new ThreadStart(reader.ReadCompressInfo));
             thread.Priority = ThreadPriority.Highest;
             thread.Name = $"readerThread";
             thread.Start();
             //Thread.CurrentThread.Name = $"writerThread";
             //Thread.CurrentThread.Priority = ThreadPriority.Normal;
-            Writer writ = new Writer(outputName);
+            Writer writ = new Writer(zipName);
             Thread writer = new Thread(new ThreadStart(writ.Write));
             writer.Priority = ThreadPriority.AboveNormal;
             writer.Start();

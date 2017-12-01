@@ -17,7 +17,8 @@ namespace GZipTest1._5
 
         public static byte[][] dataSource = new byte[roundCount][];
 
-        public static Queue<CompressBlockInfo> compressQueue = new Queue<CompressBlockInfo>(roundCount);
+        public static Queue<BlockInfo> gzipQueue = new Queue<BlockInfo>(roundCount);
+        public static Queue<BlockInfo> decompressQueue = new Queue<BlockInfo>(roundCount);
         public static Queue<int> freeBlocksQueue = new Queue<int>(roundCount);
         public static Dictionary<int, WriteCompressBlock> compressDataInfo = new Dictionary<int, WriteCompressBlock>();
 

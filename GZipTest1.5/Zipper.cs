@@ -16,24 +16,22 @@ namespace GZipTest1._5
 
         public static void Compress()
         {
-            byte[] buffer = new byte[Source.blockForCompress];
-            while (!Source.endOfRead || Source.compressQueue.Count() > 0)
+            while (!Source.endOfRead || Source.gzipQueue.Count() > 0)
             {
                 bool inside = false;
-                CompressBlockInfo blockInfo = null;
+                BlockInfo blockInfo = null;
 
-                //Debug.WriteLine($"{Thread.CurrentThread.Name}");
                 lock (locker)
                 {
-                    inside = Source.compressQueue.Count() > 0;
+                    inside = Source.gzipQueue.Count() > 0;
                     if (inside)
                     {
-                        blockInfo = Source.compressQueue.Dequeue();
+                        blockInfo = Source.gzipQueue.Dequeue();
                     }
                 }
                 if (inside)
                 {
-                    Source.endOfZip = CompressBlock(blockInfo, buffer);
+                    Source.endOfZip = CompressBlock(blockInfo);
                     Source.queueToWriteEWH.Set();
                 }
                 else
@@ -42,14 +40,14 @@ namespace GZipTest1._5
             }
         }
 
-        static bool CompressBlock(CompressBlockInfo blockInfo, byte[] buffer)
+        static bool CompressBlock(BlockInfo blockInfo)
         {
             int length;
-            using (MemoryStream outStream = new MemoryStream(blockInfo.length))
+            using (MemoryStream outStream = new MemoryStream(blockInfo.originalLength))
             {
                 using (GZipStream zip = new GZipStream(outStream, CompressionMode.Compress))
                 {
-                    zip.Write(Source.dataSource[blockInfo.blockNumber], 0, blockInfo.length);
+                    zip.Write(Source.dataSource[blockInfo.blockNumber], 0, blockInfo.originalLength);
                 }
                 length = (int)(outStream.ToArray().Length);
                 Array.Copy(outStream.ToArray(), 0, Source.dataSource[blockInfo.blockNumber], 0, length);
@@ -67,11 +65,34 @@ namespace GZipTest1._5
                     readBlockNumber = blockInfo.readBlockNumber
                 });
             }
-            
-            if (!Source.compressDataInfo.ContainsKey(blockInfo.readBlockNumber))
-                Console.WriteLine("error");
 
-            return blockInfo.length != Source.blockForCompress;
+            return blockInfo.originalLength != Source.blockForCompress;
+        }
+
+        static bool DecompressBlock(BlockInfo blockInfo)
+        {
+            byte[] bufer = new byte[Source.blockForCompress];
+            using (MemoryStream outStream = new MemoryStream(Source.dataSource[blockInfo.blockNumber]))
+            {
+                using (GZipStream zip = new GZipStream(outStream, CompressionMode.Decompress))
+                {
+                    zip.Read(bufer, 0, blockInfo.originalLength);
+                }
+                
+                Array.Copy(bufer, 0, Source.dataSource[blockInfo.blockNumber], 0, blockInfo.originalLength);
+            }
+            
+            lock (locker)
+            {
+                Source.compressDataInfo.Add(blockInfo.readBlockNumber, new WriteCompressBlock
+                {
+                    blockNumber = blockInfo.blockNumber,
+                    length = blockInfo.originalLength,
+                    readBlockNumber = blockInfo.readBlockNumber
+                });
+            }
+
+            return blockInfo.originalLength != Source.blockForCompress;
         }
     }
 }
