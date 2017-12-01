@@ -9,7 +9,7 @@ namespace GZipTest1._5
 {
     class Program
     {
-        static string inputName = @"F:\test\input2.mkv", zipName = @"F:\test\test.gz", outputName = @"F:\test\output.mkv" ;
+        static string inputName = @"F:\test\input1.mkv", zipName = @"F:\test\test.gz", outputName = @"F:\test\output.mkv" ;
 
         static void Main(string[] args)
         {
@@ -17,28 +17,26 @@ namespace GZipTest1._5
             {
                 Source.dataSource[i] = new byte[Source.blockForCompress];
             }
-            Reader reader = new Reader(inputName);
+            Reader reader = new Reader(zipName);
             
             for (int i = 0; i < Source.threadCount; i++)
             {
 
-                Thread zipThread = new Thread(new ThreadStart(Zipper.Compress));
-                zipThread.Priority = ThreadPriority.Normal;
+                Thread zipThread = new Thread(new ParameterizedThreadStart(Zipper.Compress));
+                zipThread.Priority = ThreadPriority.BelowNormal;
                 zipThread.Name = $"zipThread {i}";
-                zipThread.Start();
+                zipThread.Start(false);
             }
 
-
-            Thread thread = new Thread(new ThreadStart(reader.Read));
-            //Thread thread = new Thread(new ThreadStart(reader.ReadCompressInfo));
-            thread.Priority = ThreadPriority.Highest;
+            Thread thread = new Thread(new ParameterizedThreadStart(reader.Read));
+            thread.Priority = ThreadPriority.AboveNormal;
             thread.Name = $"readerThread";
-            thread.Start();
+            thread.Start(false);
             //Thread.CurrentThread.Name = $"writerThread";
             //Thread.CurrentThread.Priority = ThreadPriority.Normal;
-            Writer writ = new Writer(zipName);
+            Writer writ = new Writer(outputName);
             Thread writer = new Thread(new ThreadStart(writ.Write));
-            writer.Priority = ThreadPriority.AboveNormal;
+            writer.Priority = ThreadPriority.Normal;
             writer.Start();
 
             thread.Join();

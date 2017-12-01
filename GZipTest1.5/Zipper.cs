@@ -12,35 +12,52 @@ namespace GZipTest1._5
 {
     static class Zipper
     {
+        public static Queue<BlockInfo> gzipQueue = new Queue<BlockInfo>(Source.roundCount);
+        public static EventWaitHandle queueToCompressEWH = new EventWaitHandle(false, EventResetMode.ManualReset);
+        public static bool endOfRead = false;
         static object locker = new object();
 
-        public static void Compress()
+        public static void Compress(object compress)
         {
-            while (!Source.endOfRead || Source.gzipQueue.Count() > 0)
+            while (!endOfRead || gzipQueue.Count() > 0)
             {
                 bool inside = false;
                 BlockInfo blockInfo = null;
 
                 lock (locker)
                 {
-                    inside = Source.gzipQueue.Count() > 0;
+                    inside = gzipQueue.Count() > 0;
                     if (inside)
                     {
-                        blockInfo = Source.gzipQueue.Dequeue();
+                        blockInfo = gzipQueue.Dequeue();
                     }
                 }
                 if (inside)
                 {
-                    Source.endOfZip = CompressBlock(blockInfo);
-                    Source.queueToWriteEWH.Set();
+                    int length;
+                    if ((bool)compress)
+                    {
+                        length = CompressBlock(blockInfo);
+                    }else
+                    {
+                        length = DecompressBlock(blockInfo);
+                    }
+
+                    lock (locker)
+                    {
+                        blockInfo.compressLength = length;
+                        Writer.compressDataInfo.Add(blockInfo.readBlockNumber, blockInfo);
+                    }
+                    Writer.endOfZip = blockInfo.originalLength != Source.blockForCompress;
+                    Writer.queueToWriteEWH.Set();
                 }
                 else
-                    Source.queueToCompressEWH.Reset();
-                Source.queueToCompressEWH.WaitOne();
+                    queueToCompressEWH.Reset();
+                queueToCompressEWH.WaitOne();
             }
         }
 
-        static bool CompressBlock(BlockInfo blockInfo)
+        static int CompressBlock(BlockInfo blockInfo)
         {
             int length;
             using (MemoryStream outStream = new MemoryStream(blockInfo.originalLength))
@@ -56,20 +73,10 @@ namespace GZipTest1._5
             BitConverter.GetBytes(length)
                         .CopyTo(Source.dataSource[blockInfo.blockNumber], 4);
 
-            lock(locker)
-            {
-                Source.compressDataInfo.Add(blockInfo.readBlockNumber, new WriteCompressBlock
-                {
-                    blockNumber = blockInfo.blockNumber,
-                    length = length,
-                    readBlockNumber = blockInfo.readBlockNumber
-                });
-            }
-
-            return blockInfo.originalLength != Source.blockForCompress;
+            return length; 
         }
 
-        static bool DecompressBlock(BlockInfo blockInfo)
+        static int DecompressBlock(BlockInfo blockInfo)
         {
             byte[] bufer = new byte[Source.blockForCompress];
             using (MemoryStream outStream = new MemoryStream(Source.dataSource[blockInfo.blockNumber]))
@@ -81,18 +88,9 @@ namespace GZipTest1._5
                 
                 Array.Copy(bufer, 0, Source.dataSource[blockInfo.blockNumber], 0, blockInfo.originalLength);
             }
+            return blockInfo.originalLength;
             
-            lock (locker)
-            {
-                Source.compressDataInfo.Add(blockInfo.readBlockNumber, new WriteCompressBlock
-                {
-                    blockNumber = blockInfo.blockNumber,
-                    length = blockInfo.originalLength,
-                    readBlockNumber = blockInfo.readBlockNumber
-                });
-            }
-
-            return blockInfo.originalLength != Source.blockForCompress;
         }
+
     }
 }

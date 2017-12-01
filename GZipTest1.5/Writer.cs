@@ -4,17 +4,20 @@ using System.Diagnostics;
 using System.IO;
 using System.Linq;
 using System.Text;
+using System.Threading;
 using System.Threading.Tasks;
 
 namespace GZipTest1._5
 {
     class Writer
     {
+        public static Dictionary<int, BlockInfo> compressDataInfo = new Dictionary<int, BlockInfo>();
+        public static EventWaitHandle queueToWriteEWH = new EventWaitHandle(false, EventResetMode.ManualReset);
+        public static bool endOfZip = false;
         FileStream outputStream;
         int writeBlockNumber = 0;
         int writeSize = 0;
         byte[] writeArray = new byte[Source.memorySize / 2];
-        //byte[][] writeArray = new byte[3][];
 
         public Writer(string outFileName)
         {  
@@ -24,38 +27,28 @@ namespace GZipTest1._5
 
         public void Write()
         {
-            //for (int i = 0; i < 3; i++)
-            //{
-            //    writeArray[i] = new byte[Source.memorySize / 6];
-            //}
-
-            int index = 0;
-            while (!Source.endOfZip || Source.compressDataInfo.Count() > 0)
+            while (!endOfZip || compressDataInfo.Count() > 0)
             {
-
-                if (Source.compressDataInfo.Count() > 0)
+                if (compressDataInfo.Count() > 0)
                 {
-                    while (Source.compressDataInfo.ContainsKey(writeBlockNumber))
+                    while (compressDataInfo.ContainsKey(writeBlockNumber))
                     {
-                        if ((Source.compressDataInfo.Count() > 10))
+                        if ((compressDataInfo.Count() > 10))
                         {
-                            while (Source.compressDataInfo.ContainsKey(writeBlockNumber) && writeSize < writeArray.Length - Source.blockForCompress * 2)
+                            while (compressDataInfo.ContainsKey(writeBlockNumber) && writeSize < writeArray.Length - Source.blockForCompress * 2)
                             {
-                                Array.Copy(Source.dataSource[Source.compressDataInfo[writeBlockNumber].blockNumber], 0, writeArray, writeSize, Source.compressDataInfo[writeBlockNumber].length);
-                                writeSize += Source.compressDataInfo[writeBlockNumber].length;
+                                Array.Copy(Source.dataSource[compressDataInfo[writeBlockNumber].blockNumber], 0, writeArray, writeSize, compressDataInfo[writeBlockNumber].compressLength);
+                                writeSize += compressDataInfo[writeBlockNumber].compressLength;
 
                                 QueueStep(writeBlockNumber);
-
-                                index++;
                                 writeBlockNumber++;
                             }
-                            outputStream.Write(writeArray, 0, writeSize); //Async?
+                            outputStream.Write(writeArray, 0, writeSize);
                             writeSize = 0;
-                            index = 0;
                         }
                         else
                         {
-                            outputStream.Write(Source.dataSource[Source.compressDataInfo[writeBlockNumber].blockNumber], 0, Source.compressDataInfo[writeBlockNumber].length);
+                            outputStream.Write(Source.dataSource[compressDataInfo[writeBlockNumber].blockNumber], 0, compressDataInfo[writeBlockNumber].compressLength);
                             QueueStep(writeBlockNumber);
                             writeBlockNumber++;
                         }
@@ -63,8 +56,8 @@ namespace GZipTest1._5
         }
                 else
                 {
-                    Source.queueToWriteEWH.Reset();
-                    Source.queueToWriteEWH.WaitOne();
+                    queueToWriteEWH.Reset();
+                    queueToWriteEWH.WaitOne();
                 }
             }
             outputStream.Close();
@@ -73,9 +66,9 @@ namespace GZipTest1._5
 
         private void QueueStep(int writeBlockNumber)
         {
-            Source.freeBlocksQueue.Enqueue(Source.compressDataInfo[writeBlockNumber].blockNumber);
-            Source.compressDataInfo.Remove(writeBlockNumber);
-            Source.compressQueueIsFullEWH.Set();
+            Reader.freeBlocksQueue.Enqueue(compressDataInfo[writeBlockNumber].blockNumber);
+            compressDataInfo.Remove(writeBlockNumber);
+            Reader.queueToReadEWH.Set();
         }
     }
 }
