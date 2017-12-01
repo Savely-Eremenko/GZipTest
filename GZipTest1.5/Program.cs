@@ -10,8 +10,6 @@ namespace GZipTest
 {
     class Program
     {
-        //static string inputName = @"F:\test\input2.mkv", zipName = @"F:\test\test.gz", outputName = @"F:\test\output.mkv" ;
-
         static void Main(string[] args)
         {
             for (var i = 0; i < Source.roundCount; i++)
@@ -58,12 +56,6 @@ namespace GZipTest
                     {
                         if (Writer.outputStream != null)
                             Writer.outputStream.Close();
-                        //for (int i = 0; i < WorkingThread.tPool.Length; i++)
-                        //{
-                        //    if (WorkingThread.tPool[i] != null)
-                        //        WorkingThread.tPool[i].Abort();
-                        //}
-
                         Console.WriteLine(ex.Message);
                     }
                 }
@@ -87,24 +79,14 @@ namespace GZipTest
 
                 Thread zipThread = new Thread(new ParameterizedThreadStart(Zipper.Compress));
                 zipThread.Priority = ThreadPriority.BelowNormal;
-                //zipThread.Name = $"zipThread {i}";
                 zipThread.Start(compress);
             }
 
             Thread thread = new Thread(new ParameterizedThreadStart(reader.Read));
             thread.Priority = ThreadPriority.AboveNormal;
-            //thread.Name = $"readerThread";
             thread.Start(compress);
-            //Thread.CurrentThread.Name = $"writerThread";
-            //Thread.CurrentThread.Priority = ThreadPriority.Normal;
 
-            Thread writerThread = new Thread(new ThreadStart(writer.Write));
-            writerThread.Priority = ThreadPriority.Normal;
-            writerThread.Start();
-
-            writerThread.Join();
-            //Console.WriteLine("end");
-            //Console.ReadLine();
+            writer.Write();
         }
     }
 }

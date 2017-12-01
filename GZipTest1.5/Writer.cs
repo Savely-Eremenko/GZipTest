@@ -21,8 +21,8 @@ namespace GZipTest
 
         public Writer(string outFileName)
         {  
-            outputStream = new FileStream(outFileName, FileMode.Create);
-            //outputStream =new FileStream(outFileName, FileMode.Create, FileAccess.Write, FileShare.Write, Source.blockForCompress,FileOptions.Asynchronous);
+            //outputStream = new FileStream(outFileName, FileMode.Create);
+            outputStream =new FileStream(outFileName, FileMode.Create, FileAccess.Write, FileShare.Write, Source.blockForCompress,FileOptions.Asynchronous);
         }
 
         public void Write()
@@ -58,29 +58,6 @@ namespace GZipTest
             Reader.freeBlocksQueue.Enqueue(compressDataInfo[writeBlockNumber].blockNumber);
             compressDataInfo.Remove(writeBlockNumber);
             Reader.queueToReadEWH.Set();
-        }
-
-        public void WriteSimple()
-        {
-            while (!endOfZip || compressDataInfo.Count() > 0)
-            {
-                if (compressDataInfo.Count() > 0)
-                {
-                    while (compressDataInfo.ContainsKey(writeBlockNumber))
-                    {
-                        outputStream.Write(Source.dataSource[compressDataInfo[writeBlockNumber].blockNumber], 0, compressDataInfo[writeBlockNumber].compressLength);
-                        QueueStep(writeBlockNumber);
-                        writeBlockNumber++;
-                    }
-                }
-                else
-                {
-                    queueToWriteEWH.Reset();
-                    queueToWriteEWH.WaitOne();
-                }
-            }
-            outputStream.Close();
-            Console.WriteLine("All is complete");
         }
     }
 }             
