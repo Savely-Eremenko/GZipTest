@@ -7,7 +7,7 @@ using System.Text;
 using System.Threading;
 using System.Threading.Tasks;
 
-namespace GZipTest1._5
+namespace GZipTest
 {
     class Reader
     {

@@ -8,7 +8,7 @@ using System.Text;
 using System.Threading;
 using System.Threading.Tasks;
 
-namespace GZipTest1._5
+namespace GZipTest
 {
     static class Zipper
     {
@@ -48,12 +48,16 @@ namespace GZipTest1._5
                         blockInfo.compressLength = length;
                         Writer.compressDataInfo.Add(blockInfo.readBlockNumber, blockInfo);
                     }
-                    Writer.endOfZip = blockInfo.originalLength != Source.blockForCompress;
+                    if (blockInfo.originalLength != Source.blockForCompress)
+                        Writer.endOfZip = true;
                     Writer.queueToWriteEWH.Set();
                 }
                 else
-                    queueToCompressEWH.Reset();
-                queueToCompressEWH.WaitOne();
+                {
+                    if(!endOfRead)
+                        queueToCompressEWH.Reset();
+                    queueToCompressEWH.WaitOne();
+                }  
             }
         }
 

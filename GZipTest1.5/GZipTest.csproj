@@ -6,8 +6,8 @@
     <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
     <ProjectGuid>{E8A6607F-3728-47D1-8A6A-63D156BCC3EA}</ProjectGuid>
     <OutputType>Exe</OutputType>
-    <RootNamespace>GZipTest1._5</RootNamespace>
-    <AssemblyName>GZipTest1.5</AssemblyName>
+    <RootNamespace>GZipTest</RootNamespace>
+    <AssemblyName>GZipTest</AssemblyName>
     <TargetFrameworkVersion>v4.6.1</TargetFrameworkVersion>
     <FileAlignment>512</FileAlignment>
     <AutoGenerateBindingRedirects>true</AutoGenerateBindingRedirects>
