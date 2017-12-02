@@ -95,6 +95,30 @@ namespace GZipTest
             return blockInfo.originalLength;
             
         }
+        public static void OneTradeCompress(string inputFileName, string outputFileName)
+        {
+            using (FileStream FileIn = new FileStream(inputFileName, FileMode.OpenOrCreate))
+            using (FileStream FileOut = File.Create(outputFileName))
+            {
+                using (GZipStream compressionStream = new GZipStream(FileOut, CompressionMode.Compress))
+                {
+                    FileIn.CopyTo(compressionStream);
+                }
+            }
+
+        }
+
+        public static void OneTradeDecompress(string inputFileName, string outputFileName)
+        {
+            using (FileStream FileIn = new FileStream(inputFileName, FileMode.Open))
+            using (FileStream FileOut = File.Create(outputFileName))
+            {
+                using (GZipStream decompressionStream = new GZipStream(FileIn, CompressionMode.Decompress))
+                {
+                    decompressionStream.CopyTo(FileOut);
+                }
+            }
+        }
 
     }
 }

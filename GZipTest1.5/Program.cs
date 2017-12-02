@@ -34,14 +34,21 @@ namespace GZipTest
                             case "compress":
                                 {
                                     Console.WriteLine("Идет архивация...");
-                                    StartPocess(args[1].ToString(), args[2].ToString(), true);
+                                    if (new FileInfo(args[1].ToString()).Length > Source.blockForCompress)
+                                        StartPocess(args[1].ToString(), args[2].ToString(), true);
+                                    else
+                                        Zipper.OneTradeCompress(args[1].ToString(), args[2].ToString());
                                     Console.WriteLine("Успешно.");
                                     break;
                                 }
                             case "decompress":
                                 {
                                     Console.WriteLine("Идут разархивация...");
-                                    StartPocess(args[1].ToString(), args[2].ToString(), false);
+                                    if (new FileInfo(args[1].ToString()).Length > Source.blockForCompress)
+                                        StartPocess(args[1].ToString(), args[2].ToString(), false);
+                                    else
+                                        Zipper.OneTradeDecompress(args[1].ToString(), args[2].ToString());
+                                    
                                     Console.WriteLine("Успешно.");
                                     break;
                                 }

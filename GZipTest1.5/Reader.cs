@@ -47,6 +47,7 @@ namespace GZipTest
                 queueToReadEWH.WaitOne();
             }
             Zipper.endOfRead = true;
+            Zipper.queueToCompressEWH.Set();
             inputStream.Close();
         }
         
